@@ -1,56 +1,8 @@
+import { checkConsecutives, checkIfValid } from "./errors.js";
+
 //////////////////////////////////////
 // conversion to Postfix
 //////////////////////////////////////
-
-const operators = [".", "(", ")", "+", "*", "?", "|"];
-
-
-if (i == 0 && curr!="(") {
-  console.log("error");
-}
-if(regEx[i+1]){
-  
-}
-const prev = regEx[i-1];
-const next = regEx[i+1];
-else if(curr === "(" && prev === ")") continue;
-else
-
-const checkInvalidSymbs = function(regEx){
-  
-}
-
-
-
-const checkIfValid = function (regEx) {
-  for (let i = 0; i < regEx.length; i++) {
-    const curr = regEx[i];
-    if (/[A-Z]/.test(curr)) {
-      regEx = regEx.toLowerCase();
-      //console.log("Your regular expression was converted to lower cases");
-      break;
-      // should I just treat it as an error?
-    }
-    if (curr == "." && regEx[i + 1] == ".") {
-      console.log("error");
-      break;
-    }
-    if (
-      curr === "." || // we may already have concatenation sym in the input
-      curr === "(" ||
-      curr === ")" ||
-      curr === "+" ||
-      curr === "*" ||
-      curr === "?" ||
-      curr === "|"
-    ) {
-      continue;
-    } else if (!/[a-zA-Z]/.test(curr) && !/^[0-9]+$/.test(curr)) {
-      console.log("Error");
-    }
-  }
-  return regEx;
-};
 
 export const addConcat = function (regEx) {
   regEx = checkIfValid(regEx);

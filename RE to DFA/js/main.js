@@ -1,4 +1,4 @@
-import { addConcat, infToPostfix } from "./nfa.js";
+import { infToPostfix } from "./nfa.js";
 
 // test cases - must put this in a separate file, or make it readable from command line
 
@@ -14,17 +14,17 @@ const RE8 = "3.24(A+B)*";
 
 //symbols treated: .; (; ); +; *; ?; |
 
-const res1 = addConcat(RE1);
-const res2 = addConcat(RE2);
-const res3 = addConcat(RE3);
-const res4 = addConcat(RE4);
-const res5 = addConcat(RE5);
-const res6 = addConcat(RE6);
-const res7 = addConcat(RE7);
-const res8 = addConcat(RE8);
+// const res1 = addConcat(RE1);
+// const res2 = addConcat(RE2);
+// const res3 = addConcat(RE3);
+// const res4 = addConcat(RE4);
+// const res5 = addConcat(RE5);
+// const res6 = addConcat(RE6);
+// const res7 = addConcat(RE7);
+// const res8 = addConcat(RE8);
 
-console.log(`${res1}, ${res2}, ${res3}, ${res4}`);
-console.log(`${res5}, ${res6}, ${res7}, ${res8}`);
+// console.log(`${res1}, ${res2}, ${res3}, ${res4}`);
+// console.log(`${res5}, ${res6}, ${res7}, ${res8}`);
 
 console.log(`${infToPostfix(RE1)}, 
 ${infToPostfix(RE2)}, 
