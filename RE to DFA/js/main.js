@@ -1,4 +1,4 @@
-import { addConcat } from "./js/nfa";
+import { addConcat } from "./nfa.js";
 
 // test cases - must put this in a separate file, or make it readable from command line
 
