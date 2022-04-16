@@ -1,11 +1,11 @@
-import { checkConsecutives, checkIfValid } from "./errors.js";
+import { checkOperators, checkIfValid } from "./errors.js";
 
 //////////////////////////////////////
 // conversion to Postfix
 //////////////////////////////////////
 
 export const addConcat = function (regEx) {
-  regEx = checkIfValid(regEx);
+  regEx = checkOperators(regEx);
   let output = "";
   for (let i = 0; i < regEx.length; i++) {
     const curr = regEx[i];
