@@ -1,6 +1,6 @@
 import { infToPostfix } from "./postfix.js";
-
-import { recognize, toNFA } from "./nfa.js";
+import { toNFA } from "./nfa.js";
+import { recognize } from "./compare.js";
 
 // test cases - must put this in a separate file, or make it readable from command line
 
