@@ -1,11 +1,11 @@
-import { checkOperators, checkIfValid } from "./errors.js";
+import { modifyStr } from "./errors.js";
 
 //////////////////////////////////////
 // conversion to Postfix
 //////////////////////////////////////
 
 export const addConcat = function (regEx) {
-  regEx = checkOperators(regEx);
+  regEx = modifyStr(regEx);
   let output = "";
   for (let i = 0; i < regEx.length; i++) {
     const curr = regEx[i];
