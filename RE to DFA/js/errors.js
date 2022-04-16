@@ -35,8 +35,10 @@ export const checkIfValid = function (regEx) {
     ) {
       // if regEx has any operator after ')' -> accepted
       // if regEx has (")"or"*"or"+"or"?") and its next letter  ("("or"|" )
+      /*
       console.log("No problem detected");
       console.log(`string: ${regEx}`);
+      */
       continue;
     }
   }
@@ -53,18 +55,24 @@ export const modifyStr = function (regEx) {
     const curr = regEx[i];
     if (curr == ".") {
       regEx = regEx.replace(".", "");
-      console.log("Concatenation symbol removed");
+      console.log(
+        "Warning: Concatenation symbol(s) removed for further process"
+      );
       // removes any already existing concatenation symbol for simplicity
     }
     if (/[A-Z]/.test(curr)) {
       regEx = regEx.toLowerCase();
-      console.log("Your regular expression was converted to lower cases");
+      console.log(
+        "Warning: Your regular expression was converted to lower cases"
+      );
       break;
     }
   }
-  console.log(regEx);
+  //console.log(regEx);
   return regEx;
 };
+
+//operators accepted: .; (; ); +; *; ?; |
 
 /*
 const RE1 = ".abc";
@@ -75,8 +83,6 @@ const RE5 = "a**b";
 const RE6 = "dvd+(";
 const RE7 = "s??d";
 const RE8 = ")dfs";
-
-//operators accepted: .; (; ); +; *; ?; |
 
 console.log("testing 1 \n");
 modifyStr(RE1);

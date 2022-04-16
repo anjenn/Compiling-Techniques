@@ -1,4 +1,6 @@
-import { infToPostfix } from "./nfa.js";
+import { infToPostfix } from "./postfix.js";
+
+import { recognize, toNFA } from "./nfa.js";
 
 // test cases - must put this in a separate file, or make it readable from command line
 
@@ -26,7 +28,18 @@ const RE8 = "3.24(A+B)*";
 // console.log(`${res1}, ${res2}, ${res3}, ${res4}`);
 // console.log(`${res5}, ${res6}, ${res7}, ${res8}`);
 
+/*
 console.log(`${infToPostfix(RE1)}, 
 ${infToPostfix(RE2)}, 
 ${infToPostfix(RE3)}, 
 ${infToPostfix(RE4)}`);
+*/
+
+console.log("testing");
+
+const regEx = infToPostfix(RE1);
+
+const convToNFA = toNFA(regEx);
+
+console.log("testing");
+console.log(recognize(convToNFA, "c"));
