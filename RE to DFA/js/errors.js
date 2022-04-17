@@ -3,6 +3,10 @@ const opKlcl = new Set(["*", "+", "?"]); // kleene closures
 
 export const checkIfValid = function (regEx) {
   // this function makes sure that there is no invalid placement of operators
+  if (regEx == "") {
+    console.log("error 0: No input given");
+    return -1;
+  }
   for (let i = 0; i < regEx.length; i++) {
     const curr = regEx[i];
     const next = regEx[i + 1];
@@ -13,18 +17,18 @@ export const checkIfValid = function (regEx) {
       curr != "."
     ) {
       // checks if expression has any invalid symbol ex. {, }
-      console.log("error 0: Invalid symbol included");
+      console.log("error 1: Invalid symbol included");
       console.log(`string: ${regEx}`);
       return -1;
     }
     if (i == 0 && curr != "(" && opSet.has(curr)) {
       // if regEx starts with any operator other than '('
-      console.log("error1: Can't start a string with operator");
+      console.log("error2: Can't start a string with operator");
       console.log(`string: ${regEx}`);
       return -1;
     }
     if (opKlcl.has(curr) && opKlcl.has(next)) {
-      console.log("error2: Can't have consecutive kleene closure symbols");
+      console.log("error3: Can't have consecutive kleene closure symbols");
       console.log(`string: ${regEx}`);
       // cannot have consecutive kleene closure symbols
       return -1;

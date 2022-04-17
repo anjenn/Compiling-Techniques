@@ -4,7 +4,24 @@ The string is matched if after reading the last symbol, is has transitioned into
 For an NFA with N states in can be at at most N states at a time. This algorighm finds a match by processing the input word once.
 */
 
-import { addNextState } from "./nfa.js";
+//recursive backtracking and parse trees not used
+
+/* 
+   Follows through the epsilon transitions of a state until reaching
+   a state with a symbol transition which gets added to the set of next states.
+*/
+function addNextState(state, nextStates, visited) {
+  if (state.epsilonTransitions.length) {
+    for (const st of state.epsilonTransitions) {
+      if (!visited.find((vs) => vs === st)) {
+        visited.push(st);
+        addNextState(st, nextStates, visited);
+      }
+    }
+  } else {
+    nextStates.push(state);
+  }
+}
 
 function search(nfa, word) {
   let currentStates = [];
