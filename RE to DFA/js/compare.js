@@ -1,18 +1,10 @@
-/*
-Process a string through an NFA. For each input symbol it transitions into in multiple states at the same time.
-The string is matched if after reading the last symbol, is has transitioned into at least one end state.
-For an NFA with N states in can be at at most N states at a time. This algorighm finds a match by processing the input word once.
-*/
+/////////////////////////////////////////////////
+// search algorithm for NFA & input comparison
+/////////////////////////////////////////////////
 
-//recursive backtracking and parse trees not used
-
-/* 
-   Follows through the epsilon transitions of a state until reaching
-   a state with a symbol transition which gets added to the set of next states.
-*/
 function addNextState(state, nextStates, visited) {
-  if (state.epsilonTransitions.length) {
-    for (const st of state.epsilonTransitions) {
+  if (state.epsTransitions.length) {
+    for (const st of state.epsTransitions) {
       if (!visited.find((vs) => vs === st)) {
         visited.push(st);
         addNextState(st, nextStates, visited);
@@ -22,29 +14,23 @@ function addNextState(state, nextStates, visited) {
     nextStates.push(state);
   }
 }
+/* By using this function, we are able to transition into all possible states
+reachable from the current set of states, instead of one at a time
+the current set of NFA will actually be a set of states
+*/
 
-function search(nfa, word) {
-  let currentStates = [];
-  /* The initial set of current states is either the start state or
-     the set of states reachable by epsilon transitions from the start state */
-  addNextState(nfa.start, currentStates, []);
-
-  for (const symbol of word) {
+export function search(nfa, str) {
+  let currStates = [];
+  addNextState(nfa.start, currStates, []);
+  for (const symbol of str) {
     const nextStates = [];
-
-    for (const state of currentStates) {
+    for (const state of currStates) {
       const nextState = state.transition[symbol];
       if (nextState) {
         addNextState(nextState, nextStates, []);
       }
     }
-
-    currentStates = nextStates;
+    currStates = nextStates;
   }
-
-  return currentStates.find((s) => s.isEnd) ? true : false;
-}
-
-export function recognize(nfa, word) {
-  return search(nfa, word);
+  return currStates.find((s) => s.isEnd) ? true : false;
 }

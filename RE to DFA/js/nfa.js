@@ -1,15 +1,17 @@
-import { infToPostfix } from "./postfix.js";
+/////////////////////////////////////////////////
+// NFA construction using stack
+/////////////////////////////////////////////////
 
 function createState(isEnd) {
   return {
     isEnd,
     transition: {}, // one state to at most one state
-    epsilonTransitions: [], // one state to at most 2 states
+    epsTransitions: [], // one state to at most 2 states
   };
 }
 
 function addEpsilonTransition(from, to) {
-  from.epsilonTransitions.push(to);
+  from.epsTransitions.push(to);
 }
 
 //can have only one transition to another state for a given symbol.
@@ -19,7 +21,7 @@ function addTransition(from, to, symbol) {
 
 //NFA that recognizes a single character.
 function fromSymbol(symbol) {
-  const start = createState(false);
+  const start = createState(false); //false -> for isEnd
   const end = createState(true);
   addTransition(start, end, symbol);
   return { start, end };
@@ -35,14 +37,14 @@ function concat(first, second) {
 //unions 2 NFAs (|)
 function union(first, second) {
   const start = createState(false);
-  addEpsilonTransition(start, first.start);
-  addEpsilonTransition(start, second.start);
-
   const end = createState(true);
 
+  addEpsilonTransition(start, first.start);
+  addEpsilonTransition(start, second.start);
   addEpsilonTransition(first.end, end);
-  first.end.isEnd = false;
   addEpsilonTransition(second.end, end);
+
+  first.end.isEnd = false;
   second.end.isEnd = false;
   return { start, end };
 }
@@ -54,9 +56,9 @@ function closure(nfa) {
 
   addEpsilonTransition(start, end);
   addEpsilonTransition(start, nfa.start);
-
   addEpsilonTransition(nfa.end, end);
   addEpsilonTransition(nfa.end, nfa.start);
+
   nfa.end.isEnd = false;
   return { start, end };
 }
@@ -68,8 +70,8 @@ function zeroOrOne(nfa) {
 
   addEpsilonTransition(start, end);
   addEpsilonTransition(start, nfa.start);
-
   addEpsilonTransition(nfa.end, end);
+
   nfa.end.isEnd = false;
   return { start, end };
 }
@@ -88,6 +90,7 @@ function oneOrMore(nfa) {
 
 //postfix to NFA
 export function toNFA(regEx) {
+  if (regEx == "-1") return -1;
   const stack = [];
   for (const curr of regEx) {
     if (curr === "*") {

@@ -1,6 +1,6 @@
 import { infToPostfix } from "./postfix.js";
 import { toNFA } from "./nfa.js";
-import { recognize } from "./compare.js";
+import { search } from "./compare.js";
 
 // test cases - must put this in a separate file, or make it readable from command line
 
@@ -37,9 +37,12 @@ ${infToPostfix(RE4)}`);
 
 console.log("testing");
 
-const regEx = infToPostfix(RE1);
-
-const convToNFA = toNFA(regEx);
-
 console.log("testing");
-console.log(recognize(convToNFA, "c"));
+
+function compareStr(regEx, str) {
+  const RE = infToPostfix(regEx);
+  const convToNFA = toNFA(RE);
+  return search(convToNFA, str);
+}
+
+console.log(compareStr(RE1, "ab("));
