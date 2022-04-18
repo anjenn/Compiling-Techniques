@@ -37,12 +37,10 @@ ${infToPostfix(RE4)}`);
 
 console.log("testing");
 
-console.log("testing");
-
 function compareStr(regEx, str) {
   const RE = infToPostfix(regEx);
   const convToNFA = toNFA(RE);
   return search(convToNFA, str);
 }
 
-console.log(compareStr(RE1, "ab("));
+console.log(compareStr(RE1, "ab"));

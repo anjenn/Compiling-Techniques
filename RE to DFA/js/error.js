@@ -17,8 +17,8 @@ const checkIfValid = function (regEx) {
     let isBrktClosed = false;
 
     if (curr == "(") {
-      for (let i = 0; i < regEx.length - regEx.indexOf(curr); i++) {
-        isBrktClosed = curr == ")" ? true : false;
+      for (let j = 0; j < regEx.length - i; j++) {
+        isBrktClosed = regEx[j] == ")" ? true : false;
       }
       if (isBrktClosed == false) {
         console.log("error 1: Right parenthesis missing");
@@ -27,8 +27,9 @@ const checkIfValid = function (regEx) {
       }
     }
     if (curr == ")") {
-      for (let i = regEx.indexOf(curr); i >= 0; i--) {
-        isBrktClosed = curr == "(" ? true : false;
+      for (let k = i; k >= 0; k--) {
+        console.log(isBrktClosed);
+        isBrktClosed = regEx[k] == "(" ? true : false;
       }
       if (isBrktClosed == false) {
         console.log("error 2: left parenthesis missing");
@@ -79,6 +80,7 @@ export const modifyStr = function (regEx) {
   // this function checks if the input only has operators, numbers and alphabets.
   if (checkIfValid(regEx) != 1) {
     console.log(`Error detected, cannot proceed. String: ${regEx}`);
+    // window.stop();
     return -1;
   }
   for (let i = 0; i < regEx.length; i++) {
