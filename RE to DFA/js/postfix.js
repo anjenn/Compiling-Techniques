@@ -48,7 +48,6 @@ export function infToPostfix(regEx) {
   };
   for (const curr of regEx) {
     if (opSet3.has(curr)) {
-      console.log(`checking current letter: ${curr}`);
       while (
         opStack.length &&
         peek(opStack) !== "(" &&
