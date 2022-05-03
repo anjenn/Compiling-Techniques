@@ -8,8 +8,7 @@ const opKlcl = new Set(["*", "+", "?"]); // kleene closures
 const checkIfValid = function (regEx) {
   // this function makes sure that there is no invalid placement of operators
   if (regEx == "") {
-    console.log("error 0: No input given");
-    return -1;
+    throw new Error("error 0: No input given");
   }
   for (let i = 0; i < regEx.length; i++) {
     const curr = regEx[i];
@@ -17,24 +16,28 @@ const checkIfValid = function (regEx) {
     let isBrktClosed = false;
 
     if (curr == "(") {
-      for (let j = 0; j < regEx.length - i; j++) {
-        isBrktClosed = regEx[j] == ")" ? true : false;
+      for (let j = i; j < regEx.length - i; j++) {
+        if (regEx[j] == ")") {
+          isBrktClosed = true;
+          break;
+        }
       }
       if (isBrktClosed == false) {
-        console.log("error 1: Right parenthesis missing");
         console.log(`string: ${regEx}`);
-        return -1;
+        throw new Error("error 1: Right parenthesis missing");
       }
     }
     if (curr == ")") {
       for (let k = i; k >= 0; k--) {
-        console.log(isBrktClosed);
-        isBrktClosed = regEx[k] == "(" ? true : false;
+        console.log(``);
+        if (regEx[k] == "(") {
+          isBrktClosed = true;
+          break;
+        }
       }
       if (isBrktClosed == false) {
-        console.log("error 2: left parenthesis missing");
         console.log(`string: ${regEx}`);
-        return -1;
+        throw new Error("error 2: left parenthesis missing");
       }
     }
     if (
@@ -44,21 +47,18 @@ const checkIfValid = function (regEx) {
       curr != "."
     ) {
       // checks if expression has any invalid symbol ex. {, }
-      console.log("error 3: Invalid symbol included");
       console.log(`string: ${regEx}`);
-      return -1;
+      throw new Error("error 3: Invalid symbol included");
     }
     if (i == 0 && curr != "(" && opSet.has(curr)) {
       // if regEx starts with any operator other than '('
-      console.log("error4: Can't start a string with operator");
       console.log(`string: ${regEx}`);
-      return -1;
+      throw new Error("error4: Can't start a string with operator");
     }
     if (opKlcl.has(curr) && opKlcl.has(next)) {
-      console.log("error5: Can't have consecutive kleene closure symbols");
       console.log(`string: ${regEx}`);
+      throw new Error("error5: Can't have consecutive kleene closure symbols");
       // cannot have consecutive kleene closure symbols
-      return -1;
     }
     if (
       (curr === ")" && opSet.has(next)) ||
