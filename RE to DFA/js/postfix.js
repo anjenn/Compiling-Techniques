@@ -9,7 +9,6 @@ const opSet3 = new Set([".", "+", "*", "?", "|"]);
 
 const addConcat = function (regEx) {
   regEx = modifyStr(regEx);
-  if (regEx == "-1") return -1;
 
   let output = "";
   for (let i = 0; i < regEx.length; i++) {
@@ -25,7 +24,7 @@ const addConcat = function (regEx) {
       } else output += ".";
     }
   }
-  console.log(`add concat function outcome: ${output}`);
+  console.log(`addConcat function outcome: ${output}`);
   return output;
 };
 
@@ -35,7 +34,6 @@ const peek = function (stack) {
 
 export function infToPostfix(regEx) {
   regEx = addConcat(regEx);
-  if (regEx == "-1") return -1;
 
   let output = "";
   const opStack = [];

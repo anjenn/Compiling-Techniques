@@ -5,10 +5,38 @@
 const opSet = new Set(["(", ")", "+", "*", "?", "|"]); // set of all operators
 const opKlcl = new Set(["*", "+", "?"]); // kleene closures
 
+const printError = function (errNum, regEx) {
+  let errMsg = "";
+  switch (errNum) {
+    case 0:
+      errMsg = "No regular expression was provided";
+      break;
+    case 1:
+      errMsg = "Right parenthesis is missing in your regular expression";
+      break;
+    case 2:
+      errMsg = "Left parenthesis missing";
+      break;
+    case 3:
+      //if expression has any invalid symbol ex. curly brackets
+      errMsg = "Invalid symbol included";
+      break;
+    case 4:
+      errMsg = "Can't start a string with an operator other than '('";
+      break;
+    case 5:
+      errMsg = "Can't have consecutive kleene closure symbols";
+  }
+  throw new Error(
+    errMsg + ` (${errNum})\n !! Your Regular Expression: ${regEx}`
+  );
+};
+
 const checkIfValid = function (regEx) {
   // this function makes sure that there is no invalid placement of operators
+
   if (regEx == "") {
-    throw new Error("error 0: No input given");
+    printError(0, regEx);
   }
   for (let i = 0; i < regEx.length; i++) {
     const curr = regEx[i];
@@ -23,21 +51,19 @@ const checkIfValid = function (regEx) {
         }
       }
       if (isBrktClosed == false) {
-        console.log(`string: ${regEx}`);
-        throw new Error("error 1: Right parenthesis missing");
+        printError(1, regEx);
       }
     }
     if (curr == ")") {
       for (let k = i; k >= 0; k--) {
-        console.log(``);
+        // console.log(`i: ${i}, k: ${k}, current letter = ${regEx[k]}`);
         if (regEx[k] == "(") {
           isBrktClosed = true;
           break;
         }
       }
       if (isBrktClosed == false) {
-        console.log(`string: ${regEx}`);
-        throw new Error("error 2: left parenthesis missing");
+        printError(2, regEx);
       }
     }
     if (
@@ -46,19 +72,14 @@ const checkIfValid = function (regEx) {
       !opSet.has(curr) &&
       curr != "."
     ) {
-      // checks if expression has any invalid symbol ex. {, }
-      console.log(`string: ${regEx}`);
-      throw new Error("error 3: Invalid symbol included");
+      printError(3, regEx);
     }
     if (i == 0 && curr != "(" && opSet.has(curr)) {
       // if regEx starts with any operator other than '('
-      console.log(`string: ${regEx}`);
-      throw new Error("error4: Can't start a string with operator");
+      printError(4, regEx);
     }
     if (opKlcl.has(curr) && opKlcl.has(next)) {
-      console.log(`string: ${regEx}`);
-      throw new Error("error5: Can't have consecutive kleene closure symbols");
-      // cannot have consecutive kleene closure symbols
+      printError(5, regEx);
     }
     if (
       (curr === ")" && opSet.has(next)) ||
@@ -73,16 +94,12 @@ const checkIfValid = function (regEx) {
       continue;
     }
   }
-  return 1;
 };
 
 export const modifyStr = function (regEx) {
   // this function checks if the input only has operators, numbers and alphabets.
-  if (checkIfValid(regEx) != 1) {
-    console.log(`Error detected, cannot proceed. String: ${regEx}`);
-    // window.stop();
-    return -1;
-  }
+  checkIfValid(regEx);
+
   for (let i = 0; i < regEx.length; i++) {
     const curr = regEx[i];
     if (curr == ".") {

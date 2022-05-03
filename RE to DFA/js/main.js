@@ -11,7 +11,7 @@ const RE4 = "ba+(b|c)"; //this is suppposed to have concatenation symbols added
 
 const RE5 = "(A|b)*|a";
 const RE6 = "3.2.4.(A+.B)*";
-const RE7 = "3.24(A+B)*";
+const RE7 = "3.24A+B)*";
 const RE8 = "3.24(A+B)*";
 
 //symbols treated: .; (; ); +; *; ?; |
@@ -44,3 +44,4 @@ function compareStr(regEx, str) {
 }
 
 console.log(compareStr(RE1, "ab"));
+console.log(compareStr(RE7, "a"));
