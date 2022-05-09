@@ -2,6 +2,9 @@ import { infToPostfix } from "./postfix.js";
 import { toNFA } from "./nfa.js";
 import { search } from "./compare.js";
 
+const inputF = document.getElementById("inputfile");
+const outputF = document.getElementById("output");
+
 // test cases - must put this in a separate file, or make it readable from command line
 
 const RE1 = "(A|b)*|a";
@@ -34,6 +37,20 @@ ${infToPostfix(RE2)},
 ${infToPostfix(RE3)}, 
 ${infToPostfix(RE4)}`);
 */
+
+// Reading input file
+inputF.addEventListener("change", function () {
+  var file = this.files[0];
+  var reader = new FileReader();
+  reader.onload = function () {
+    var fileContentArray = this.result.split(/\r\n|\n/);
+    for (var line = 0; line < fileContentArray.length - 1; line++) {
+      console.log(line + " --> " + fileContentArray[line]);
+    }
+    outputF.textContent = fileContentArray.result;
+  };
+  file.readAsText(this.files[0]);
+});
 
 console.log("testing");
 
