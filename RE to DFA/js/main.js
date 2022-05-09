@@ -4,39 +4,7 @@ import { search } from "./compare.js";
 
 const inputF = document.getElementById("inputfile");
 const outputF = document.getElementById("output");
-
-// test cases - must put this in a separate file, or make it readable from command line
-
-const RE1 = "(A|b)*|a";
-const RE2 = "324(A+B)*";
-const RE3 = "a*|b";
-const RE4 = "ba+(b|c)"; //this is suppposed to have concatenation symbols added
-
-const RE5 = "(A|b)*|a";
-const RE6 = "3.2.4.(A+.B)*";
-const RE7 = "3.24A+B)*";
-const RE8 = "3.24(A+B)*";
-
 //symbols treated: .; (; ); +; *; ?; |
-
-// const res1 = addConcat(RE1);
-// const res2 = addConcat(RE2);
-// const res3 = addConcat(RE3);
-// const res4 = addConcat(RE4);
-// const res5 = addConcat(RE5);
-// const res6 = addConcat(RE6);
-// const res7 = addConcat(RE7);
-// const res8 = addConcat(RE8);
-
-// console.log(`${res1}, ${res2}, ${res3}, ${res4}`);
-// console.log(`${res5}, ${res6}, ${res7}, ${res8}`);
-
-/*
-console.log(`${infToPostfix(RE1)}, 
-${infToPostfix(RE2)}, 
-${infToPostfix(RE3)}, 
-${infToPostfix(RE4)}`);
-*/
 
 // Reading input file
 inputF.addEventListener("change", function () {
@@ -51,6 +19,33 @@ inputF.addEventListener("change", function () {
   };
   reader.readAsText(file);
 });
+
+const inputToNFA = function (arr) {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    result[i] = compareStr(arr[i], arr[i + 1]);
+    //should make it a way that we don't skip it for result array
+    // while i increases by 2
+
+    //put input to NFA into the above code block
+    //and present the result visually
+    //also try to put the result into output file
+  }
+};
+
+// Printing to output file
+
+// test cases - must put this in a separate file, or make it readable from command line
+
+const RE1 = "(A|b)*|a";
+const RE2 = "324(A+B)*";
+const RE3 = "a*|b";
+const RE4 = "ba+(b|c)"; //this is suppposed to have concatenation symbols added
+
+const RE5 = "(A|b)*|a";
+const RE6 = "3.2.4.(A+.B)*";
+const RE7 = "3.24A+B)*";
+const RE8 = "3.24(A+B)*";
 
 console.log("testing");
 
