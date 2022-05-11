@@ -44,11 +44,13 @@ const checkIfValid = function (regEx) {
     let isBrktClosed = false;
 
     if (curr == "(") {
-      for (let j = i; j < regEx.length + 2 - i; j++) {
+      for (let j = i; j < regEx.length; j++) {
         //regEx.length + 1 - i
+        /*
         console.log(i, j);
         console.log(regEx.length + 2 - i);
         console.log(regEx[j]);
+        */
         if (regEx[j] == ")") {
           isBrktClosed = true;
           break;

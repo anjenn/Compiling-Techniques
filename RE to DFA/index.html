@@ -4,31 +4,67 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>RE to NFA</title>
+    <link rel="stylesheet" href = "style.css">
   </head>
   <body>
     <div class="instruction">
-      <h3>Rules for the Input Syntax: </h3>
+      <h2>Rules for the input file format:</h2>
       <p>
-        1. Write your regular expression after its number of order
-        in 2 digits followed by a dot ex. 01. (a|b)*|c
-      <p>
-        2. In the next line,
-        provide a string that you would like to compare with your regular
-        expression
+        0. This program takes 2 lines of text from the input file consecutively
+        per each round of testing.
       </p>
-      <p>* Check the console for detailed error description
-      </p></p>
+      <p>
+        1. In your first line, provide regular expression after number of the
+        test case in 2 digits followed by a dot and an empty space. (ex. 01. (a|b)*|c)
+      </p>
+      <p>
+        2. In the next line, provide a string that you would like to compare
+        with your regular expression without any symbol or space before and
+        after.
+      </p>
+      <p>
+        3. Make sure that your Regular Expression fulfills the following requirements:
+        <ul>
+          <li>It should not be an empty string (blank line)
+          </li>
+          <li>
+            If a parenthesis is used, it should always be in pair with another.
+          </li>
+          <li>
+            The string only consists of valid symbols: alphabets, numbers, operators (dot, |, parenthesis, *, ?, +)
+          </li>
+          <li>
+            No Kleene closure symbol is are used more than once consecutively. (ex. "a**", "b?*")
+          </li>
+        </ul>
+      </p>
+      <p>
+        4. The program has additional features in order to reduce ambiguity, and to enhance the performance.
+        <br>You find warning messages in the console when such case is detected.
+        <ul>
+          <li>
+            In case of a regular expression already containing concatenation symbol (.), the program will still run, but after removing all such symbols.            
+          </li>
+          <li>
+            In case of a regular expression containing any alphabets in upper cases, the program will still run, but after converting all to lower cases first.
+          </li>
+        </ul>
+      </p>
+      <p>
+        * Check the console for detailed error description in case you don't get
+        results for all the provided cases.
+      </p>
     </div>
     <!-- <script type="module" src="./js/nfa.js"></script> -->
     <input type="file" name="inputfile" id="inputfile" />
     <h2>Your Input:</h2>
-    <br />
+    <!-- <br /> -->
     <pre id="output"></pre>
     <!-- text in pre element is displayed in a fixed-width fotn, preserving both spaces and line breaks -->
     <h2>Results:</h2>
     <div>
-      <p id="results">aaaa</p>
+      <p id="results"></p>
     </div>
     <script type="module" src="./js/main.js"></script>
   </body>

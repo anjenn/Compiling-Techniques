@@ -22,16 +22,12 @@ from the input file and checks the validity
 */
 const textFileToNFA = function (arr) {
   let result = [];
-  for (let i = 0; i < arr.length; i++) {
-    console.log(`!!Testing the Input No.${i + 1}`);
+  for (let i = 0; i < arr.length / 2; i++) {
     let k = i * 2;
     arr[k] = arr[k].slice(4);
     result[i] = compareStr(arr[k], arr[k + 1]);
-    //resultArr[i] += `${i}\n`;
   }
   dispOnBroser(result);
-  console.log("Tester");
-
   //printing to screen doesn't work here
   //trying to either print it as an original array
   //or everything concatenated as one big string, but concatenated with \n
@@ -39,11 +35,10 @@ const textFileToNFA = function (arr) {
 };
 
 const dispOnBroser = function (result) {
-  for (let i = 0; i < result.lenth; i++) {
-    resultArr[i] = `Case ${i} result: ${result[i]}\n`;
+  for (let i = 0; i < result.length; i++) {
+    resultArr[i] = `Test_${i + 1}: ${result[i]}\r`;
   }
-  console.log(resultArr);
-  resOnBrowser.textContent = resultArr.toString();
+  resOnBrowser.innerHTML = resultArr.join("<br>") + "<br>";
 };
 
 // Reading input file
@@ -53,12 +48,17 @@ inputF.addEventListener("change", function () {
   reader.onload = function (progressEvent) {
     var lines = this.result.split("\n");
     for (var line = 0; line < lines.length - 1; line++) {
-      console.log(line + " --> " + lines[line]);
+      // console.log(line + " --> " + lines[line]);
       outputF.textContent = reader.result;
     }
     // function to get rid of the space after line (empty space is added to the end of all lines read)
     for (let j = 0; j < lines.length; j++) {
-      arrFromText[j] = lines[j].slice(0, -1);
+      if (j == lines.length - 1) {
+        arrFromText[j] = lines[j];
+      } else {
+        arrFromText[j] = lines[j].slice(0, -1);
+      }
+      // console.log(arrFromText);
     }
     textFileToNFA(arrFromText);
   };

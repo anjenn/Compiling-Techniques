@@ -24,7 +24,7 @@ const addConcat = function (regEx) {
       } else output += ".";
     }
   }
-  console.log(`addConcat function outcome: ${output}`);
+  //console.log(`addConcat function outcome: ${output}`);
   return output;
 };
 

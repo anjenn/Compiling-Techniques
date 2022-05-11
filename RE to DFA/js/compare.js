@@ -22,8 +22,11 @@ the current set of NFA will actually be a set of states
 export function search(nfa, str) {
   let currStates = [];
   addNextState(nfa.start, currStates, []);
+  //in case it contains any upper case symbol
+  str = str.toLowerCase();
   for (const symbol of str) {
     const nextStates = [];
+
     for (const state of currStates) {
       const nextState = state.transition[symbol];
       if (nextState) {
