@@ -7,13 +7,18 @@
     <title>Document</title>
   </head>
   <body>
-    <div>
-      <p class="instruction">
-        Input Syntax: 1. Write your regular expression after its number of order
-        in 2 digits followed by a dot ex. 01. (a|b)*|c 2. In the next line,
+    <div class="instruction">
+      <h3>Rules for the Input Syntax: </h3>
+      <p>
+        1. Write your regular expression after its number of order
+        in 2 digits followed by a dot ex. 01. (a|b)*|c
+      <p>
+        2. In the next line,
         provide a string that you would like to compare with your regular
         expression
       </p>
+      <p>* Check the console for detailed error description
+      </p></p>
     </div>
     <!-- <script type="module" src="./js/nfa.js"></script> -->
     <input type="file" name="inputfile" id="inputfile" />
@@ -21,7 +26,10 @@
     <br />
     <pre id="output"></pre>
     <!-- text in pre element is displayed in a fixed-width fotn, preserving both spaces and line breaks -->
-    <h3>End of Input</h3>
+    <h2>Results:</h2>
+    <div>
+      <p id="results">aaaa</p>
+    </div>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

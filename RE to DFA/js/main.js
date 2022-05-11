@@ -4,6 +4,10 @@ import { search } from "./compare.js";
 
 const inputF = document.getElementById("inputfile");
 const outputF = document.getElementById("output");
+const resOnBrowser = document.getElementById("results");
+const arrFromText = [];
+const resultArr = [];
+
 //symbols treated: .; (; ); +; *; ?; |
 
 // Comparison function
@@ -16,36 +20,30 @@ const compareStr = function (regEx, str) {
 /* Function that takes the regular expresison, and string
 from the input file and checks the validity
 */
-
-const RE1 = "(A|b)*|a";
-
-const inputToNFA = function (arr) {
+const textFileToNFA = function (arr) {
   let result = [];
   for (let i = 0; i < arr.length; i++) {
-    console.log(
-      `/////////////////\nTesting the Input No.${i}\n/////////////////`
-    );
+    console.log(`!!Testing the Input No.${i + 1}`);
     let k = i * 2;
-    //console.log(arr[0].length);
     arr[k] = arr[k].slice(4);
-
-    console.log(arr[0].length); //9
-    console.log(RE1.length); //8
-
-    /*for (let j = 0; j < arr[0].length; j++) {
-      console.log(arr[0][j]);
-      console.log(RE1[j]);
-    }*/
-
-    // compare arr[0] and RE1 and see why they are different
-    // arr[0] is 1 bit longer than RE1
-
     result[i] = compareStr(arr[k], arr[k + 1]);
-    return result;
-    //put input to NFA into the above code block
-    //and present the result visually
-    //also try to put the result into output file
+    //resultArr[i] += `${i}\n`;
   }
+  dispOnBroser(result);
+  console.log("Tester");
+
+  //printing to screen doesn't work here
+  //trying to either print it as an original array
+  //or everything concatenated as one big string, but concatenated with \n
+  return result;
+};
+
+const dispOnBroser = function (result) {
+  for (let i = 0; i < result.lenth; i++) {
+    resultArr[i] = `Case ${i} result: ${result[i]}\n`;
+  }
+  console.log(resultArr);
+  resOnBrowser.textContent = resultArr.toString();
 };
 
 // Reading input file
@@ -58,26 +56,18 @@ inputF.addEventListener("change", function () {
       console.log(line + " --> " + lines[line]);
       outputF.textContent = reader.result;
     }
-
-    /////
-    console.log(lines[0].length);
-    for (let j = 0; j < lines[0].length; j++) {
-      console.log(lines[0][j]);
-      //console.log(RE1[j]);
+    // function to get rid of the space after line (empty space is added to the end of all lines read)
+    for (let j = 0; j < lines.length; j++) {
+      arrFromText[j] = lines[j].slice(0, -1);
     }
-
-    ////
-
-    inputToNFA(lines);
+    textFileToNFA(arrFromText);
   };
   reader.readAsText(file);
 });
 
+/*
 // Printing to output file
-
-// test cases - must put this in a separate file, or make it readable from command line
-
-// const RE1 = "(A|b)*|a";
+const RE1 = "(A|b)*|a";
 const RE2 = "324(A+B)*";
 const RE3 = "a*|b";
 const RE4 = "ba+(b|c)"; //this is suppposed to have concatenation symbols added
@@ -90,3 +80,5 @@ const RE8 = "3.24(A+B)*";
 console.log("testing");
 console.log(compareStr(RE1, "ab"));
 console.log(compareStr(RE7, "a"));
+
+*/
