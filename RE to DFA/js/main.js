@@ -78,7 +78,8 @@ const RE7 = "3.24A+B)*";
 const RE8 = "3.24(A+B)*";
 
 console.log("testing");
-console.log(compareStr(RE1, "ab"));
-console.log(compareStr(RE7, "a"));
 
+console.log(compareStr("(a*b)?b", "aabb"));
+console.log(compareStr("ba?(b|c)", "bab"));
+console.log(compareStr("324(A+B)", "324ab"));
 */

@@ -1,3 +1,9 @@
+.Title {
+  /* border-bottom: 3px solid pink; */
+  /* padding: 30px; */
+  background-color: rgb(255, 213, 220);
+  width: 70vw;
+}
 .instruction {
   width: 70vw;
 }

@@ -8,6 +8,11 @@
     <link rel="stylesheet" href = "style.css">
   </head>
   <body>
+    <header>
+      <div>
+        <h1 class="Title">RE to NFA Converter</h1>
+      </div>
+    </header>
     <div class="instruction">
       <h2>Rules for the input file format:</h2>
       <p>
@@ -49,11 +54,14 @@
           <li>
             In case of a regular expression containing any alphabets in upper cases, the program will still run, but after converting all to lower cases first.
           </li>
+          <li>
+            If the string for comparison (in the second line) is in upper-case, this will as well be converted to lower-case, but without any warning.
+          </li>
         </ul>
       </p>
       <p>
         * Check the console for detailed error description in case you don't get
-        results for all the provided cases.
+        results for all the provided test cases.
       </p>
     </div>
     <!-- <script type="module" src="./js/nfa.js"></script> -->
